@@ -31,19 +31,23 @@ def GetPentaCraft(kol, current_time):
                 get_type_Version = get_Type.split()
                 if not("недоступен" in get_Type): result[get_type_Version[0][:-1] + ' ' + get_type_Version[1]] = [[get_Name + " " + get_type_Version[len(get_type_Version)-1], get_Online, 'Неизвестно']]
                         
-            driver.quit()
+            try: driver.quit()
+            except: pass
             AppendLogs(current_time, 'Get successful - [PentaCraft]')
             return result
         else:
             if kol == 3:
                 AppendLogs(current_time, 'Warning - [PentaCraft]')
-                driver.quit()
+                try: driver.quit()
+                except: pass
                 return None
             else:
                 AppendLogs(current_time, 'Repeating - [PentaCraft]')
-                driver.quit()
+                try: driver.quit()
+                except: pass
                 return GetPentaCraft(kol+1, current_time)
     except Exception as e:
         AppendLogs(current_time, str(e) + ' - [PentaCraft]')
-        driver.quit()
+        try: driver.quit()
+        except: pass
         return None

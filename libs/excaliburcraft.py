@@ -35,19 +35,23 @@ def GetExcaliburCraft(kol, current_time):
                 if len(servers) > 0:
                     result[get_name_vers[0] + " " + get_name_vers[1][:-1]] = servers
 
-            driver.quit()
+            try: driver.quit()
+            except: pass
             AppendLogs(current_time, 'Get successful - [ExcaliburCraft]')
             return result
         else:
             if kol == 3:
                 AppendLogs(current_time, 'Warning - [ExcaliburCraft]')
-                driver.quit()
+                try: driver.quit()
+                except: pass
                 return None
             else:
                 AppendLogs(current_time, 'Repeating - [ExcaliburCraft]')
-                driver.quit()
+                try: driver.quit()
+                except: pass
                 return GetExcaliburCraft(kol+1, current_time)
     except Exception as e:
         AppendLogs(current_time, str(e) + ' - [ExcaliburCraft]')
-        driver.quit()
+        try: driver.quit()
+        except: pass
         return None

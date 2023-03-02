@@ -37,19 +37,23 @@ def GetLoliLand(kol, current_time):
                     arr.append([get_server_Name + ' ' + get_Version, get_Online, 100])
                 result[get_Name + ' ' + get_Version] = arr
                     
-            driver.quit()
+            try: driver.quit()
+            except: pass
             AppendLogs(current_time, 'Get successful - [LoliLand]')  
             return result
         else:
             if kol == 3:
                 AppendLogs(current_time, 'Warning - [LoliLand]')
-                driver.quit()
+                try: driver.quit()
+                except: pass
                 return None
             else:
                 AppendLogs(current_time, 'Repeating - [LoliLand]')
-                driver.quit()
+                try: driver.quit()
+                except: pass
                 return GetLoliLand(kol+1, current_time)
     except Exception as e:
         AppendLogs(current_time, str(e) + ' - [LoliLand]')
-        driver.quit()
+        try: driver.quit()
+        except: pass
         return None

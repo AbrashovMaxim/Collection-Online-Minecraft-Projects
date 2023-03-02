@@ -31,30 +31,39 @@ def GetShadowCraft(kol, current_time):
                 get_split = get_name.split()
                 if len(get_split) == 1: version = '1.7.10'
                 else: version = get_split[1]
-                get_online = int(i.find(class_='block-monitor-prs').text)
-                if get_online == 0: get_Max_Online = 0
-                else:
-                    span_style =  i.find(class_='block-monitor-fix').find('span')['style']
-                    style = float(cssutils.parseStyle(span_style).width[:-1])
-                    get_Max_Online = int((get_online*100)/style)
+                try: 
+                    get_online = int(i.find(class_='block-monitor-prs').text)
+                    if get_online == 0: get_Max_Online = 0
+                    else:
+                        span_style =  i.find(class_='block-monitor-fix').find('span')['style']
+                        style = float(cssutils.parseStyle(span_style).width[:-1])
+                        get_Max_Online = int((get_online*100)/style)
+                except: 
+                    get_online = i.find(class_='block-monitor-prs').text
+                    get_Max_Online = get_online
+                
 
                 arr = []
                 arr.append([get_name + ' ' + version, get_online, get_Max_Online])
                 result[get_name + ' ' + version] = arr
     
-            driver.quit()
+            try: driver.quit()
+            except: pass
             AppendLogs(current_time, 'Get successful - [ShadowCraft]')
             return result
         else:
             if kol == 3:
                 AppendLogs(current_time, 'Warning - [ShadowCraft]')
-                driver.quit()
+                try: driver.quit()
+                except: pass
                 return None
             else:
                 AppendLogs(current_time, 'Repeating - [ShadowCraft]')
-                driver.quit()
+                try: driver.quit()
+                except: pass
                 return GetShadowCraft(kol+1, current_time)
     except Exception as e:
         AppendLogs(current_time, str(e) + ' - [ShadowCraft]')
-        driver.quit()
+        try: driver.quit()
+        except: pass
         return None

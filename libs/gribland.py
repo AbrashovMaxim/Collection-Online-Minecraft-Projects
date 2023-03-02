@@ -36,19 +36,23 @@ def GetGribLand(kol, current_time):
                 arr.append([get_name + ' ' + version, get_online, 'Неизвестно'])
                 result[get_name + ' ' + version] = arr
     
-            driver.quit()
+            try: driver.quit()
+            except: pass
             AppendLogs(current_time, 'Get successful - [GribLand]')      
             return result
         else:
             if kol == 3:
                 AppendLogs(current_time, 'Warning - [GribLand]')
-                driver.quit()
+                try: driver.quit()
+                except: pass
                 return None
             else:
                 AppendLogs(current_time, 'Repeating - [GribLand]')
-                driver.quit()
+                try: driver.quit()
+                except: pass
                 return GetGribLand(kol+1, current_time)
     except Exception as e:
         AppendLogs(current_time, str(e) + ' - [GribLand]')
-        driver.quit()
+        try: driver.quit()
+        except: pass
         return None

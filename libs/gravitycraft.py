@@ -59,19 +59,23 @@ def GetGravityCraft(kol, current_time):
                     result[type_server + ' ' + getVersion] = arr
                     arr = []
     
-            driver.quit()
+            try: driver.quit()
+            except: pass
             AppendLogs(current_time, 'Get successful - [GravityCraft]')  
             return result
         else:
             if kol == 3:
                 AppendLogs(current_time, 'Warning - [GravityCraft]')
-                driver.quit()
+                try: driver.quit()
+                except: pass
                 return None
             else:
                 AppendLogs(current_time, 'Repeating - [GravityCraft]')
-                driver.quit()
+                try: driver.quit()
+                except: pass
                 return GetGravityCraft(kol+1, current_time)
     except Exception as e:
         AppendLogs(current_time, str(e) + ' - [GravityCraft]')
-        driver.quit()
+        try: driver.quit()
+        except: pass
         return None

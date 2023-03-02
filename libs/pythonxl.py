@@ -38,7 +38,7 @@ def CreateWorkSheet(wb, curent_time):
 def SetStyleCells(cell, color, bold):
     thin = Side(border_style="thin", color="000000")
 
-    if bold: cell.border = Border(bottom=thin)
+    if bold: cell.border = Border(bottom=thin, right=thin)
     else: cell.border = Border(right=thin, left=thin, bottom=thin)
     cell.fill = PatternFill("solid", fgColor=color)
     cell.font = Font(size=12, bold=bold)

@@ -50,19 +50,23 @@ def GetSimpleMinecraft(kol, current_time):
                     result[type_server + ' ' + getVersion] = arr
                     arr = []
     
-            driver.quit()    
+            try: driver.quit()
+            except: pass   
             AppendLogs(current_time, 'Get successful - [SimpleMinecraft]')    
             return result
         else:
             if kol == 3:
                 AppendLogs(current_time, 'Warning - [SimpleMinecraft]')
-                driver.quit()
+                try: driver.quit()
+                except: pass
                 return None
             else:
                 AppendLogs(current_time, 'Repeating - [SimpleMinecraft]')
-                driver.quit()
+                try: driver.quit()
+                except: pass
                 return GetSimpleMinecraft(kol+1, current_time)
     except Exception as e:
         AppendLogs(current_time, str(e) + ' - [SimpleMinecraft]')
-        driver.quit()
+        try: driver.quit()
+        except: pass
         return None

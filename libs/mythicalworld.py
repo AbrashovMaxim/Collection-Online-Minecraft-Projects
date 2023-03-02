@@ -36,19 +36,23 @@ def GetMythicalWorld(kol, current_time):
                 arr.append([getName + ' ' + getVersion, get_online, get_Max_Online])
                 result[getName + ' ' + getVersion] = arr
     
-            driver.quit()
+            try: driver.quit()
+            except: pass
             AppendLogs(current_time, 'Get successful - [MythicalWorld]')
             return result
         else:
             if kol == 3:
                 AppendLogs(current_time, 'Warning - [MythicalWorld]')
-                driver.quit()
+                try: driver.quit()
+                except: pass
                 return None
             else:
                 AppendLogs(current_time, 'Repeating - [MythicalWorld]')
-                driver.quit()
+                try: driver.quit()
+                except: pass
                 return GetMythicalWorld(kol+1, current_time)
     except Exception as e:
         AppendLogs(current_time, str(e) + ' - [MythicalWorld]')
-        driver.quit()
+        try: driver.quit()
+        except: pass
         return None

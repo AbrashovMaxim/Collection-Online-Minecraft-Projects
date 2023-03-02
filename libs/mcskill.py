@@ -54,19 +54,23 @@ def GetMCSkill(kol, current_time):
                     
                     result[getName + ' ' + Version] = arr
                         
-            driver.quit()
+            try: driver.quit()
+            except: pass
             AppendLogs(current_time, 'Get successful - [MCSkill]')  
             return result
         else:
             if kol == 3:
                 AppendLogs(current_time, 'Warning - [MCSkill]')
-                driver.quit()
+                try: driver.quit()
+                except: pass
                 return None
             else:
                 AppendLogs(current_time, 'Repeating - [MCSkill]')
-                driver.quit()
+                try: driver.quit()
+                except: pass
                 return GetMCSkill(kol+1, current_time)
     except Exception as e:
         AppendLogs(current_time, str(e) + ' - [MCSkill]')
-        driver.quit()
+        try: driver.quit()
+        except: pass
         return None

@@ -41,19 +41,23 @@ def GetMinecraftOnly(kol, current_time):
                     except:
                         pass
     
-            driver.quit()
+            try: driver.quit()
+            except: pass
             AppendLogs(current_time, 'Get successful - [MinecraftOnly]')  
             return result
         else:
             if kol == 3:
                 AppendLogs(current_time, 'Warning - [MinecraftOnly]')
-                driver.quit()
+                try: driver.quit()
+                except: pass
                 return None
             else:
                 AppendLogs(current_time, 'Repeating - [MinecraftOnly]')
-                driver.quit()
+                try: driver.quit()
+                except: pass
                 return GetMinecraftOnly(kol+1, current_time)
     except Exception as e:
         AppendLogs(current_time, str(e) + ' - [MinecraftOnly]')
-        driver.quit()
+        try: driver.quit()
+        except: pass
         return None

@@ -34,19 +34,23 @@ def GetGrandGear(kol, current_time):
                 arr.append([getName, get_online, get_Max_Online])
                 result[getName] = arr
     
-            driver.quit()
+            try: driver.quit()
+            except: pass
             AppendLogs(current_time, 'Get successful - [GrandGear]')   
             return result
         else:
             if kol == 3:
                 AppendLogs(current_time, 'Warning - [GrandGear]')
-                driver.quit()
+                try: driver.quit()
+                except: pass
                 return None
             else:
                 AppendLogs(current_time, 'Repeating - [GrandGear]')
-                driver.quit()
+                try: driver.quit()
+                except: pass
                 return GetGrandGear(kol+1, current_time)
     except Exception as e:
         AppendLogs(current_time, str(e) + ' - [GrandGear]')
-        driver.quit()
+        try: driver.quit()
+        except: pass
         return None

@@ -62,20 +62,24 @@ def GetCubixWorld(kol, current_time):
                     arr.append(temp_arr)
                 getVers = pol_result[nameServer].split()
                 result[nameServer + " " + getVers[len(getVers)-1]] = arr
-            driver.quit()
+            try: driver.quit()
+            except: pass
             AppendLogs(current_time, 'Get successful - [CubixWorld]')   
             return result
         else:
             if kol == 3:
                 AppendLogs(current_time, 'Warning - [CubixWorld]')
-                driver.quit()
+                try: driver.quit()
+                except: pass
                 return None
             else:
                 AppendLogs(current_time, 'Repeating - [CubixWorld]')
-                driver.quit()
+                try: driver.quit()
+                except: pass
                 return GetCubixWorld(kol+1, current_time)
     except Exception as e:
         AppendLogs(current_time, str(e) + ' - [CubixWorld]')
-        driver.quit()
+        try: driver.quit()
+        except: pass
         return None
         
